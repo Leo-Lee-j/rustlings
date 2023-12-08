@@ -16,3 +16,7 @@ public/
 
 # Local Netlify folder
 .netlify
+*.exe
+.github
+.vscode
+.devcontainer
