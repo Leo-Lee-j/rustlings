@@ -20,7 +20,6 @@
 //
 // No hints this time!
 
-// I AM NOT DONE
 
 pub enum Command {
     Uppercase,
@@ -29,14 +28,20 @@ pub enum Command {
 }
 
 mod my_module {
+    use std::collections::HashMap;
     use super::Command;
 
-    // TODO: Complete the function signature!
-    pub fn transformer(input: ???) -> ??? {
-        // TODO: Complete the output declaration!
-        let mut output: ??? = vec![];
+    pub fn transformer(input: Vec<(String, Command)>) -> Vec<String>{
+        let mut output: Vec<String> = vec![];
         for (string, command) in input.iter() {
-            // TODO: Complete the function body. You can do it!
+            match command {
+                Command::Uppercase => output.push(string.to_uppercase()),
+                Command::Trim => output.push(string.trim().to_string()),
+                // match 中枚举变量是引用，所以这里 unsize 要解引用
+                // 注意 + 运算符需要两个 &str 类型的参数，所以要用 &"bar" 转换成 &str
+                Command::Append(unsize) =>
+                    output.push(string.to_string() + &"bar".repeat(*unsize)),
+            }
         }
         output
     }
@@ -44,8 +49,7 @@ mod my_module {
 
 #[cfg(test)]
 mod tests {
-    // TODO: What do we need to import to have `transformer` in scope?
-    use ???;
+    use super::my_module::transformer;
     use super::Command;
 
     #[test]
