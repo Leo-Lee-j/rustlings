@@ -5,14 +5,15 @@
 // Execute `rustlings hint move_semantics2` or use the `hint` watch subcommand
 // for a hint.
 
-// I AM NOT DONE
 
 #[test]
 fn main() {
     let vec0 = vec![22, 44, 66];
 
-    let mut vec1 = fill_vec(vec0);
+    // vec0 所有权转移给 fill_vec
+    let mut vec1 = fill_vec(vec0.clone());
 
+    // vec0 这里再次使用了 vec0, 所以所有权不能转移到 fill_vec
     assert_eq!(vec0, vec![22, 44, 66]);
     assert_eq!(vec1, vec![22, 44, 66, 88]);
 }
