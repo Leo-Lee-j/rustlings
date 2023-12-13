@@ -9,7 +9,6 @@
 // Execute `rustlings hint errors6` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 use std::num::ParseIntError;
 
@@ -24,14 +23,25 @@ impl ParsePosNonzeroError {
     fn from_creation(err: CreationError) -> ParsePosNonzeroError {
         ParsePosNonzeroError::Creation(err)
     }
-    // TODO: add another error conversion function here.
-    // fn from_parseint...
+    fn from_parseint(err: ParseIntError) -> ParsePosNonzeroError {
+        ParsePosNonzeroError::ParseInt(err)
+    }
 }
 
+/*
+map_err(ParsePosNonzeroError::from_parseint) 是对 Result 类型的错误处理。
+如果 parse() 方法返回了一个 Err，那么 map_err 会被调用，它接受一个函数，
+这个函数会将原始的 Err 转换为一个新的 Err。在这个例子中，
+ParsePosNonzeroError::from_parseint 函数将 ParseIntError 错误转换为 ParsePosNonzeroError 错误。
+  ? 是 Rust 中的一个错误处理运算符，它用于简化错误处理。如果 Result 是 Ok，那么它会返回 Ok 中的值，
+  如果是 Err，那么它会立即从当前函数返回这个 Err，并且自动将这个 Err 转换为当前函数返回类型的 Err。
+    所以，这行代码的意思是尝试将字符串 s 解析为 i64 类型的整数，如果解析失败，
+    那么将错误转换为 ParsePosNonzeroError 类型，并立即返回这个错误。
+ */
+
 fn parse_pos_nonzero(s: &str) -> Result<PositiveNonzeroInteger, ParsePosNonzeroError> {
-    // TODO: change this to return an appropriate error instead of panicking
     // when `parse()` returns an error.
-    let x: i64 = s.parse().unwrap();
+    let x: i64 = s.parse().map_err(ParsePosNonzeroError::from_parseint)?;
     PositiveNonzeroInteger::new(x).map_err(ParsePosNonzeroError::from_creation)
 }
 
