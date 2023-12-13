@@ -8,7 +8,6 @@
 // Execute `rustlings hint lifetimes1` or use the `hint` watch subcommand for a
 // hint.
 
-// I AM NOT DONE
 
 /*
 当你返回一个引用，你需要明确指定这个引用的生命周期。
