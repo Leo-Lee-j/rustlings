@@ -10,7 +10,11 @@
 
 // I AM NOT DONE
 
-fn longest(x: &str, y: &str) -> &str {
+/*
+当你返回一个引用，你需要明确指定这个引用的生命周期。
+这是因为 Rust 需要知道这个引用何时不再有效，以防止悬垂引用的出现。
+ */
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x
     } else {
