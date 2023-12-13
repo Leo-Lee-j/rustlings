@@ -17,3 +17,6 @@ Because traits indicate shared behavior between data types, they are useful when
 ## Further information
 
 - [Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
+
+Trait 类似 Java 的 interface，但是不同的是，trait 可以有默认实现，
+而且 trait 也可以实现 trait，这样就可以实现类似 Java 的多继承了。
